@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Taskio.Application.Services;
+using Taskio.Application.Interfaces;
 using Taskio.Domain.Entities;
 
 namespace Taskio.Application.Commands.Create
@@ -19,7 +19,7 @@ namespace Taskio.Application.Commands.Create
                 );
 
                 await _tasksService.CreateNewTask(newTask, cancellationToken);
-                return new CreateNewTaskCommandResponse("Task successfuly created.");
+                return new CreateNewTaskCommandResponse("Task successfuly created");
             }
             catch ( Exception ex )
             {

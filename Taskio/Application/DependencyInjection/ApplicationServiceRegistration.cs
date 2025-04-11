@@ -1,4 +1,5 @@
-﻿using Taskio.Application.Services;
+﻿using Taskio.Application.Interfaces;
+using Taskio.Application.Services;
 using Taskio.Domain.Repositories;
 using Taskio.Infra.Repositories;
 

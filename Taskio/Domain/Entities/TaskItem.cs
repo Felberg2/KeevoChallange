@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Taskio.Domain.Enumerables;
+﻿using Taskio.Domain.Enumerables;
 
 namespace Taskio.Domain.Entities
 {
@@ -23,8 +22,10 @@ namespace Taskio.Domain.Entities
             Create();
         }
 
-        public void UpdateStatus(int status)
+        public void UpdateTask(string name, string description, int status)
         {
+            Name = name;
+            Description = description;
             Status = (Status)status;
             Update();
         }

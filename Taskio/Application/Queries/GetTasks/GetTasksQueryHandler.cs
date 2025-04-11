@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Taskio.Application.Services;
+using Taskio.Application.Interfaces;
 
 namespace Taskio.Application.Queries.GetTasks
 {

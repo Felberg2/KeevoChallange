@@ -39,9 +39,10 @@ namespace Taskio.Controllers
         [ProducesResponseType(typeof(UpdateTaskCommandResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateTask(Task task)
+        public async Task<IActionResult> UpdateTask([FromBody] UpdateTaskDto updatedTask, CancellationToken cancellationToken)
         {
-            var response = new UpdateTaskCommandResponse();
+            var command = new UpdateTaskCommand(updatedTask);
+            var response = await _mediator.Send(command, cancellationToken);
             return CustomResponse(response);
         }
 
@@ -49,9 +50,10 @@ namespace Taskio.Controllers
         [ProducesResponseType(typeof(DeleteTaskCommandResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DeleteTask()
+        public async Task<IActionResult> DeleteTask([FromBody] UpdateTaskDto updateTaskDto, CancellationToken cancellationToken)
         {
-            var response = new DeleteTaskCommandResponse();
+            var command = new DeleteTaskCommand(updateTaskDto.Id);
+            var response = await _mediator.Send(command, cancellationToken);
             return CustomResponse(response);
         }
     }

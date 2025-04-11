@@ -9,6 +9,13 @@ namespace Taskio.Infra.Repositories
     {
         private readonly TaskioDbContext _dbContext = dbContext;
 
+        public async Task<TaskItem> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await _dbContext.
+                Tasks.
+                FirstOrDefaultAsync(t => t.Id.Equals(id), cancellationToken);
+        }
+
         public async Task<List<TaskItem>> GetTasksAsync(CancellationToken cancellationToken)
         {
             return await _dbContext
@@ -34,7 +41,8 @@ namespace Taskio.Infra.Repositories
             var task = await _dbContext.Tasks.FindAsync(id, cancellationToken);
             if (task != null)
             {
-                _dbContext.Tasks.Remove(task);
+                task.Delete();
+                _dbContext.Tasks.Update(task);
                 await _dbContext.SaveChangesAsync(cancellationToken);
             }
         }

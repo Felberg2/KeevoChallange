@@ -2,5 +2,6 @@
 {
     public class DeleteTaskDto
     {
+        public Guid Id { get; set; }
     }
 }
