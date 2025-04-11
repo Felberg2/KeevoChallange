@@ -59,7 +59,7 @@ namespace Taskio.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("tasks");
                 });
 #pragma warning restore 612, 618
         }

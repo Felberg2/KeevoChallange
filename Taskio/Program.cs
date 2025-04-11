@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Taskio.Application.DependencyInjection;
 using Taskio.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TaskioDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddMediatR(cfg =>
-cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

@@ -6,8 +6,8 @@ namespace Taskio.Domain.Enumerables
     {
         [Description("To Do")]
         ToDo = 0,
-        [Description("On Going")]
-        OnGoing = 1,
+        [Description("Doing")]
+        Doing = 1,
         [Description("Done")]
         Done = 2,
         [Description("Canceled")]

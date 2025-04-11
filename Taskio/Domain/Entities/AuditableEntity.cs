@@ -9,17 +9,17 @@
 
         public void Create()
         {
-            CreatedDate = DateTime.Now;
+            CreatedDate = DateTime.UtcNow;
         }
 
         public void Update()
         {
-            UpdatedDate = DateTime.Now;
+            UpdatedDate = DateTime.UtcNow;
         }
 
         public void Delete()
         {
-            DeletedDate = DateTime.Now;
+            DeletedDate = DateTime.UtcNow;
             IsDeleted = true;
         }
     }

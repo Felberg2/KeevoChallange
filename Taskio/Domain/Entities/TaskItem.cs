@@ -15,7 +15,7 @@ namespace Taskio.Domain.Entities
 
         public TaskItem(string name, string description, int status)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             UserId = 1;
             Name = name;
             Description = description;

@@ -17,10 +17,10 @@ namespace Taskio.Controllers
         [ProducesResponseType(typeof(GetTasksQueryResponse),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetTasks()
+        public async Task<IActionResult> GetTasks(CancellationToken cancellationToken)
         {
             var query = new GetTasksQuery();
-            var response = await _mediator.Send(query);
+            var response = await _mediator.Send(query, cancellationToken);
             return CustomResponse(response);
         }
 
@@ -28,9 +28,10 @@ namespace Taskio.Controllers
         [ProducesResponseType(typeof(CreateNewTaskCommandResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult CreateTask()
+        public async Task<IActionResult> CreateTask([FromBody] NewTaskDto newTask, CancellationToken cancellationToken)
         {
-            var response = new CreateNewTaskCommandResponse();
+            var command = new CreateNewTaskCommand(newTask);
+            var response = await _mediator.Send(command, cancellationToken);
             return CustomResponse(response);
         }
 

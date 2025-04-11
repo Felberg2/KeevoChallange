@@ -1,0 +1,29 @@
+﻿services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: G00ggrUI6£!U
+      POSTGRES_DB: Taskio
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: taskio_api
+    ports:
+      - "5004:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=Taskio;Username=admin;Password=G00ggrUI6£!U
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

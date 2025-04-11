@@ -4,6 +4,7 @@ namespace Taskio.Application.Services
 {
     public interface ITasksService
     {
-        public Task CreateNewTask(TaskItem task);
+        public Task<List<TaskItem>> GetTasks(CancellationToken cancellationToken);
+        public Task CreateNewTask(TaskItem task, CancellationToken cancellationToken);
     }
 }
